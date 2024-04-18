@@ -28,7 +28,7 @@ export default function Form() {
         <View className="p-5 flex-col space-y-10 w-full">
           <View>
             <Text className="text-3xl text-center font-bold text-gray-700">
-              Añade un libro
+              Add a book
             </Text>
           </View>
           <View>
@@ -75,7 +75,7 @@ export default function Form() {
             <View
               className="w-full rounded-md p-4"
               style={{backgroundColor: colorBg}}>
-              <Text className="text-center text-white">Guardar</Text>
+              <Text className="text-center text-white">Save</Text>
             </View>
           </TouchableOpacity>
         </View>

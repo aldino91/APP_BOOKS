@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Icon from '../components/Icon';
 import {
   InfoPropsInfoBook,
   ScreenBNavigationPropInfoBook,
@@ -19,6 +18,7 @@ import Loading from '../components/Loading';
 import RespError from '../components/RespError';
 import {handleDeleteBook} from '../http-functions/functionsQuery';
 import {useQueryClient} from '@tanstack/react-query';
+import UseGetAllBooksQuery from '../hooks/UseGetAllBooksQuery';
 
 export default function InfoBook({route, navigation}: InfoPropsInfoBook) {
   const queryClient = useQueryClient();
@@ -27,6 +27,7 @@ export default function InfoBook({route, navigation}: InfoPropsInfoBook) {
   const {id} = route.params?.data;
 
   const {data, isLoading, error} = UseGetBookByIdQuery(id);
+  const {refetch} = UseGetAllBooksQuery();
 
   const {mutate} = UseDeleteBookQuery();
 
@@ -67,17 +68,18 @@ export default function InfoBook({route, navigation}: InfoPropsInfoBook) {
             className="w-1/3  rounded-md items-center p-2"
             style={styles.edit}>
             <View>
-              <Icon icon="pencil" color="green" />
+              <Text>Update</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              handleDeleteBook({id, mutate, navigation, queryClient})
-            }
+            onPress={() => {
+              handleDeleteBook({id, mutate, navigation, queryClient});
+              refetch();
+            }}
             className="w-1/3 items-center p-2"
             style={styles.delete}>
             <View>
-              <Icon icon="trash" color="red" />
+              <Text>Delete</Text>
             </View>
           </TouchableOpacity>
         </View>
