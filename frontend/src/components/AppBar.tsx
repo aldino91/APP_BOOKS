@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import Icon from './Icon';
 import {useNavigation} from '@react-navigation/native';
 
 export default function AppBar() {
@@ -12,10 +11,12 @@ export default function AppBar() {
   return (
     <View className="bg-zinc-300 flex-row justify-between  px-2 py-2 items-center">
       <View className="flex-row justify-start items-center">
-        <Text className="font-bold text-base">Lista de libros</Text>
+        <Text className="font-bold text-base">List of books</Text>
       </View>
       <TouchableOpacity onPress={goToAddBookPage}>
-        <Icon icon="add-circle-outline" />
+        <View className="border border-gray-400 rounded-md p-1">
+          <Text>Add</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );

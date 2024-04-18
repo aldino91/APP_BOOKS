@@ -7,6 +7,7 @@ import {useUpdateBookQuery} from '../hooks/UseUpdateBookQuery';
 import UseGetBookByIdQuery from '../hooks/UseGetBookByIdQuery';
 import RespError from '../components/RespError';
 import Loading from '../components/Loading';
+import UseGetAllBooksQuery from '../hooks/UseGetAllBooksQuery';
 
 export interface UpdateBook {
   id: string;
@@ -22,6 +23,8 @@ export default function Form({route, navigation}: InfoProps) {
   const {id} = route.params?.data || {};
 
   const {data, isLoading, error} = UseGetBookByIdQuery(id);
+
+  const {refetch} = UseGetAllBooksQuery();
 
   const book = data ? data[1] : undefined;
 
@@ -40,7 +43,7 @@ export default function Form({route, navigation}: InfoProps) {
       <View className="p-5 flex-col space-y-10 w-full">
         <View>
           <Text className="text-3xl text-center font-bold text-gray-700">
-            Actualiza el libro
+            Update the book
           </Text>
         </View>
         <View>
@@ -84,11 +87,12 @@ export default function Form({route, navigation}: InfoProps) {
               completedAt: '',
               navigation,
             });
+            refetch();
           }}>
           <View
             className="w-full rounded-md p-4"
             style={{backgroundColor: colorBg}}>
-            <Text className="text-center text-white">Actualizar</Text>
+            <Text className="text-center text-white">Update</Text>
           </View>
         </TouchableOpacity>
       </View>
